@@ -6,8 +6,32 @@
   </head>
   <body>
     <h1>Speech Timer</h1>
+    <div id="menu">
     <a href="timer.html?min=5&max=7">Standard Speech</a>    
     <a href="timer.html?min=1&max=2">Table Topics</a>    
     <a href="timer.html?min=4&max=5">Icebreaker</a>
+    <form id="custom" action="timer.html" method="get">
+      <a style="flex: 1" onclick="doSubmit()">Custom Time</a>
+      <input name="min" type="number" placeholder="min" min="1" max="30">
+      <input name="max" type="number" placeholder="max" min="1" max="30">
+    </form>
+    <script>
+      const form = document.getElementById('custom');
+      function doSubmit(...args) {
+        form.min.setCustomValidity('');
+        form.max.setCustomValidity('');
+        if (Number(form.min.value) <= 0) {
+          form.min.setCustomValidity('Minimum time must be greater than zero minutes.');
+        }
+        if (Number(form.min.value) >= Number(form.max.value)) {
+          form.max.setCustomValidity('Maximum time must be greater than minimum time.');
+        }
+        if (form.reportValidity()) {
+          form.submit();
+        }
+      }
+      //form.onsubmit = doSubmit;
+    </script>
+    </div>
   </body>
 </html>
