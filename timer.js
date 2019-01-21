@@ -1,8 +1,10 @@
 class Timer {
-  constructor(minTime, maxTime) {
-    this.minTime = minTime;
-    this.maxTime = maxTime;
-    this.midTime = (minTime + maxTime) / 2;
+  constructor() {
+    const params = new URL(window.location.href).searchParams;
+    this.minTime = Number(params.get('min')) * 60;
+    this.maxTime = Number(params.get('max')) * 60;
+    this.mute = Boolean(params.get('mute'));
+    this.midTime = (this.minTime + this.maxTime) / 2;
     this.rate = 20;
     this.state = 0;
     this.startTime = null;
@@ -10,6 +12,7 @@ class Timer {
     this.timerId = null;
     this.pauseStart = null;
     this.pauseButton = document.getElementById('pause');
+    this.sound = this.mute ? null : new Audio('ding-sound-effect_2.mp3');
   }
 
   start() {
@@ -19,8 +22,6 @@ class Timer {
     this.pauseButton.onclick = () => this.paused = !this.paused;
     this.updatePauseIcon();
   }
-
-  onPause() {}
 
   set paused(paused) {
     if (paused == this.paused) return;
@@ -43,9 +44,16 @@ class Timer {
   }
 
   tick() {
-    if (this.paused) return;
+    if (this.paused) {
+      return;
+    }
 
     this.time = (Date.now() - this.startTime) / 1000;
+    if (this.sound && this.time >= this.minTime) {
+      new AudioContext();
+      this.sound.play();
+      this.sound = null;
+    }
 
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -134,8 +142,4 @@ class Timer {
   }
 }
 
-const params = new URL(window.location.href).searchParams;
-new Timer(
-    Number((params.get('min') || 5) * 60),
-    Number((params.get('max') || 7) * 60))
-    .start();
+new Timer().start();
