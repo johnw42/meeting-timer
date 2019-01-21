@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
+    <title>timer</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      body {
+          background: #333;
+          color: white;
+          user-select: none;
+      }
+      @media(orientation: landscape) {
+          #time {
+              text-align: left;
+              position: fixed;
+              right: 24px;
+          }
+      }
+      #canvas {
+          width: 95vmin;
+          height: 95vmin;
+      }
+      #time {
+          text-align: center;
+          font-size: 15vmax;
+          font-family: sans-serif;
+          font-weight: bold;
+      }
+      #buttons {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          margin: 24px;
+          padding: none;
+          width: 95vw;
+          text-align: right;
+      }
+      .material-icons {
+          font-size: 15vw;
+      }
+      .hidden {
+          display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="time"></div>
+    <canvas id="canvas" width="1000" height="1000">
+      An alternative text describing what your canvas displays.
+    </canvas>
+    <div id="buttons">
+      <!-- An alternative text describing what your canvas displays. -->
+      <i id="pause" class="material-icons"></i>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
