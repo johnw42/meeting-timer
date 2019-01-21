@@ -2,6 +2,7 @@ class Timer {
   constructor(minTime, maxTime) {
     this.minTime = minTime;
     this.maxTime = maxTime;
+    this.midTime = (minTime + maxTime) / 2;
     this.rate = 20;
     this.state = 0;
     this.startTime = null;
@@ -84,20 +85,23 @@ class Timer {
 
     ctx.beginPath()
     ctx.arc(0, 0, 100, 0, 2 * pi);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = this.time < this.minTime ?
+        'white' :
+        this.time < this.midTime ? '#0f0' : '#ff0';
     ctx.fill();
 
-    const longEnough = this.time >= this.minTime;
     const handAngle = 2 * pi * this.time / this.maxTime;
-    const cutoffAngle = 2 * pi * this.minTime / this.maxTime
+    const warningAngle = 2 * pi * this.minTime / this.maxTime
 
     ctx.rotate(-pi / 2);
 
-    ctx.beginPath()
-    ctx.moveTo(0, 0);
-    ctx.arc(0, 0, 100, cutoffAngle, 2 * pi);
-    ctx.fillStyle = this.time <= this.minTime ? '#0f0' : '#ff0';
-    ctx.fill();
+    if (this.time < this.minTime) {
+      ctx.beginPath()
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, 100, warningAngle, 2 * pi);
+      ctx.fillStyle = '#7a7';
+      ctx.fill();
+    }
 
     ctx.beginPath()
     ctx.moveTo(0, 0);

@@ -1,0 +1,49 @@
+body {
+  background: #333;
+  color: white;
+  user-select: none;
+  font-size: 48px;
+  font-family: sans-serif;
+}
+@media(orientation: landscape) {
+  #time {
+    text-align: left;
+    position: fixed;
+    right: 24px;
+  }
+}
+h1 {
+  text-align: center;
+}
+a, a:any-link {
+  display: flex;
+  background: #555;
+  padding: 0.5em;
+  margin: 0.5em;
+  color: inherit;
+  text-decoration: none;
+}
+#canvas {
+  width: 95vmin;
+  height: 95vmin;
+}
+#time {
+  text-align: center;
+  font-size: 15vmax;
+  font-weight: bold;
+}
+#buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 24px;
+  padding: none;
+  width: 95vw;
+  text-align: right;
+}
+.material-icons {
+  font-size: 15vw;
+}
+.hidden {
+  display: none;
+}
