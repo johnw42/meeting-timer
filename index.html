@@ -7,13 +7,15 @@
   <body>
     <h1>Speech Timer</h1>
     <div id="menu">
-    <a href="timer.html?min=5&max=7">Standard Speech</a>    
-    <a href="timer.html?min=1&max=2">Table Topics</a>    
-    <a href="timer.html?min=4&max=5">Icebreaker</a>
+    <a href="timer.html?min=1&max=2">Table Topics <span class="range">1–2</span></a>
+    <a href="timer.html?min=4&max=6">Icebreaker <span class="range">4–6</span></a>
+    <a href="timer.html?min=5&max=7">Project 2–9 <span class="range">5–7</span></a>
+    <a href="timer.html?min=8&max=10">Project 10 <span class="range">8–10</span></a>
+    <a href="timer.html?min=2&max=3">Evaluator <span class="range">2–3</span></a>
     <form id="custom" action="timer.html" method="get">
-      <a style="flex: 1" onclick="doSubmit()">Custom Time</a>
       <input name="min" type="number" placeholder="min" min="1" max="30">
       <input name="max" type="number" placeholder="max" min="1" max="30">
+      <a style="flex: 1; text-align: center" onclick="doSubmit()">Custom Time</a>
     </form>
     <script>
       const form = document.getElementById('custom');
@@ -30,7 +32,6 @@
           form.submit();
         }
       }
-      //form.onsubmit = doSubmit;
     </script>
     </div>
   </body>

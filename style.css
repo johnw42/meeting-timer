@@ -36,8 +36,20 @@ form {
   text-decoration: none;
   margin: 0;
 }
+span.range {
+  font-size: 0.75em;
+  color: #aaa;
+  float: right;
+}
+span.range::before {
+  content: "("
+}
+span.range::after {
+  content: "m)"
+}
 a, a:any-link, input {
-  display: flex;
+  /* display: flex; */
+  /* flex-direction: row; */
   background: #555;
   padding: 0.5em;
   margin: 0.5em;
