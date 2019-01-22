@@ -7,9 +7,18 @@ body {
   font-size: 48px;
   font-family: sans-serif;
 }
-#menu {
+div.column {
   display: flex;
   flex-direction: column;
+}
+div.row {
+  display: flex;
+  flex-direction: row;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 @media(orientation: landscape) {
   #time {
@@ -18,15 +27,25 @@ body {
     right: 24px;
   }
 }
-h1 {
+h1, h2 {
   text-align: center;
+}
+h1 {
   font-size: 72px;
+}
+h2 {
+  font-size: 48px;
 }
 input {
   display: flex;
   font-size: inherit;
   border: none;
   color: inherit;
+  text-decoration: none;
+  margin: 0;
+}
+input[type=checkbox] {
+  transform: scale(3.0);
 }
 form {
   display: flex;
@@ -41,15 +60,7 @@ span.range {
   color: #aaa;
   float: right;
 }
-span.range::before {
-  content: "("
-}
-span.range::after {
-  content: "m)"
-}
-a, a:any-link, input {
-  /* display: flex; */
-  /* flex-direction: row; */
+a, a:any-link, input, div.row {
   background: #555;
   padding: 0.5em;
   margin: 0.5em;

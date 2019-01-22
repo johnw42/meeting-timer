@@ -5,34 +5,9 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Speech Timer</h1>
-    <div id="menu">
-    <a href="timer.html?min=1&max=2">Table Topics <span class="range">1–2</span></a>
-    <a href="timer.html?min=4&max=6">Icebreaker <span class="range">4–6</span></a>
-    <a href="timer.html?min=5&max=7">Project 2–9 <span class="range">5–7</span></a>
-    <a href="timer.html?min=8&max=10">Project 10 <span class="range">8–10</span></a>
-    <a href="timer.html?min=2&max=3">Evaluator <span class="range">2–3</span></a>
-    <form id="custom" action="timer.html" method="get">
-      <input name="min" type="number" placeholder="min" min="1" max="30">
-      <input name="max" type="number" placeholder="max" min="1" max="30">
-      <a style="flex: 1; text-align: center" onclick="doSubmit()">Custom Time</a>
-    </form>
     <script>
-      const form = document.getElementById('custom');
-      function doSubmit(...args) {
-        form.min.setCustomValidity('');
-        form.max.setCustomValidity('');
-        if (Number(form.min.value) <= 0) {
-          form.min.setCustomValidity('Minimum time must be greater than zero minutes.');
-        }
-        if (Number(form.min.value) >= Number(form.max.value)) {
-          form.max.setCustomValidity('Maximum time must be greater than minimum time.');
-        }
-        if (form.reportValidity()) {
-          form.submit();
-        }
-      }
+      const ac = new AudioContext();
     </script>
-    </div>
+    <iframe src="menu.html" allow="autoplay"></iframe>
   </body>
 </html>

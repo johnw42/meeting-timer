@@ -1,18 +1,24 @@
 class Timer {
   constructor() {
     const params = new URL(window.location.href).searchParams;
-    this.minTime = Number(params.get('min')) * 60;
-    this.maxTime = Number(params.get('max')) * 60;
-    this.mute = Boolean(params.get('mute'));
+    const timeScale = params.get('fast') ? 1 : 60;
+    this.minTime = Number(params.get('min')) * timeScale;
+    this.maxTime = Number(params.get('max')) * timeScale;
+    this.minChime = Boolean(params.get('minChime'));
+    this.maxChime = Boolean(params.get('maxChime'));
     this.midTime = (this.minTime + this.maxTime) / 2;
     this.rate = 20;
-    this.state = 0;
     this.startTime = null;
     this.time = null;
     this.timerId = null;
     this.pauseStart = null;
     this.pauseButton = document.getElementById('pause');
-    this.sound = this.mute ? null : new Audio('ding-sound-effect_2.mp3');
+    if (this.minChime || this.maxChime) {
+      this.sound =
+          new Audio(params.get('chimeUrl') || 'ding-sound-effect_2.mp3');
+    }
+    this.timeExpired = false;
+    this.stopSignState = true;
   }
 
   start() {
@@ -43,16 +49,26 @@ class Timer {
         this.paused ? 'play_circle_outline' : 'pause_circle_outline';
   }
 
+  chime() {
+    this.sound.pause();
+    this.sound.currentTime = 0;
+    this.sound.play();
+  }
+
   tick() {
     if (this.paused) {
       return;
     }
 
     this.time = (Date.now() - this.startTime) / 1000;
-    if (this.sound && this.time >= this.minTime) {
-      new AudioContext();
-      this.sound.play();
-      this.sound = null;
+
+    if (this.time >= this.minTime && this.minChime) {
+      this.chime();
+      this.minChime = false;
+    }
+    if (this.time >= this.maxTime && this.maxChime) {
+      this.chime();
+      this.maxChime = false;
     }
 
     const canvas = document.getElementById('canvas');
@@ -68,18 +84,16 @@ class Timer {
     if (this.time < this.maxTime) {
       this.drawClock(ctx);
     } else {
-      if (this.state == 0) {
+      if (!this.timeExpired) {
         clearInterval(this.timerId);
         document.getElementById('buttons').classList.add('hidden');
         this.timerId = setInterval(() => this.tick(), 500);
-        this.state = 1;
+        this.timeExpired = true;
       }
-      if (this.state == 1) {
+      if (this.stopSignState) {
         this.drawStopSign(ctx);
-        this.state = 2;
-      } else {
-        this.state = 1;
       }
+      this.stopSignState = !this.stopSignState;
     }
 
     const intTime = Math.floor(this.time);
