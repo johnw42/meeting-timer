@@ -60,12 +60,19 @@ span.range {
   color: #aaa;
   float: right;
 }
-a, a:any-link, input, div.row {
+#credit {
+  font-size: 24px;
+  color: #777;
+  margin-top: auto;
+}
+#menu a, #menu a:any-link, input, div.row {
   background: #555;
   padding: 0.5em;
   margin: 0.5em;
-  color: inherit;
   text-decoration: none;
+}
+a, a:any-link {
+  color: inherit;
 }
 #canvas {
   width: 95vmin;
