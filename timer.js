@@ -156,4 +156,4 @@ class Timer {
   }
 }
 
-new Timer().start();
+window.onload = () => new Timer().start();
